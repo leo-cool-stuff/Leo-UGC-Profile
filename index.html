@@ -1,0 +1,445 @@
+<!--
+═══════════════════════════════════════════════════════════════════
+  LEO — UGC CREATOR PORTFOLIO
+  ───────────────────────────────────────────────────────────────
+  HOW TO EDIT (everything you need is in the CONFIG block below):
+   1. Change your email + social links.
+   2. Paste your VIDEO links (mp4 files work best, or YouTube/Vimeo).
+   3. Paste your PHOTO image links.
+  Just scroll down to <script> → CONFIG and replace the placeholders.
+═══════════════════════════════════════════════════════════════════
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo — UGC Creator | Tech & SaaS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c10;
+    --bg-2:#10131a;
+    --card:#141821;
+    --card-2:#181d28;
+    --line:rgba(255,255,255,.08);
+    --text:#eef1f6;
+    --muted:#9aa3b2;
+    --accent:#3b9dff;
+    --accent-2:#6ad0ff;
+    --glow:rgba(59,157,255,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+
+  /* ── Ambient background glow ── */
+  .bg-fx{position:fixed;inset:0;z-index:-1;overflow:hidden}
+  .bg-fx span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+  .bg-fx .b1{width:480px;height:480px;background:radial-gradient(circle,#1d4d8c,transparent 70%);top:-120px;left:-100px}
+  .bg-fx .b2{width:520px;height:520px;background:radial-gradient(circle,#0e3a5c,transparent 70%);bottom:-160px;right:-120px;opacity:.4}
+
+  /* ── Nav ── */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(10,12,16,.7);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+  .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--glow)}
+  .nav-links{display:flex;gap:30px;font-size:14.5px;font-weight:500;color:var(--muted)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{
+    background:var(--accent);color:#031020;font-weight:600;font-size:14px;
+    padding:9px 18px;border-radius:9px;transition:transform .2s,box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px var(--glow)}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* ── Hero ── */
+  header{padding:80px 0 70px;text-align:center}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--card);border:1px solid var(--line);
+    padding:7px 16px;border-radius:999px;font-size:13px;color:var(--muted);
+    font-weight:500;margin-bottom:26px;
+  }
+  .pill .live{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399}
+  header h1{
+    font-size:clamp(38px,7vw,68px);font-weight:900;letter-spacing:-.03em;
+    line-height:1.04;margin-bottom:22px;
+  }
+  header h1 .grad{
+    background:linear-gradient(105deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header .sub{
+    font-size:clamp(16px,2.4vw,20px);color:var(--muted);max-width:620px;
+    margin:0 auto 36px;font-weight:400;
+  }
+  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    padding:14px 28px;border-radius:11px;font-weight:600;font-size:15.5px;
+    transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:9px;
+  }
+  .btn-primary{background:var(--accent);color:#031020}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px var(--glow)}
+  .btn-ghost{background:var(--card);border:1px solid var(--line);color:var(--text)}
+  .btn-ghost:hover{background:var(--card-2);transform:translateY(-2px)}
+
+  /* ── Section heads ── */
+  section{padding:64px 0}
+  .sec-tag{color:var(--accent);font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+  .sec-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+  .sec-intro{color:var(--muted);max-width:600px;font-size:16.5px}
+  .center{text-align:center}
+  .center .sec-intro{margin:0 auto}
+
+  /* ── About ── */
+  .about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center;margin-top:18px}
+  .about-photo{
+    aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid var(--line);
+    background:linear-gradient(150deg,var(--card),var(--card-2));position:relative;
+  }
+  .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .about-photo .ph{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:10px;color:var(--muted);font-size:14px;text-align:center;padding:20px;
+  }
+  .about-photo .ph svg{opacity:.4}
+  .about-text p{color:var(--muted);margin-bottom:16px;font-size:16px}
+  .about-text strong{color:var(--text);font-weight:600}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:28px}}
+
+  /* ── Niches ── */
+  .niche-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:34px}
+  .niche{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;
+    transition:transform .25s,border-color .25s,background .25s;
+  }
+  .niche:hover{transform:translateY(-4px);border-color:rgba(59,157,255,.4);background:var(--card-2)}
+  .niche .ic{
+    width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;
+    background:linear-gradient(140deg,rgba(59,157,255,.18),rgba(106,208,255,.08));
+    border:1px solid rgba(59,157,255,.2);
+  }
+  .niche h3{font-size:17px;font-weight:700;margin-bottom:7px}
+  .niche p{color:var(--muted);font-size:14.5px}
+
+  /* ── Video grid ── */
+  .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;margin-top:34px}
+  .vcard{
+    aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--card);
+    border:1px solid var(--line);position:relative;transition:transform .25s,box-shadow .25s;
+  }
+  .vcard:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+  .vcard video,.vcard iframe{width:100%;height:100%;object-fit:cover;border:none;display:block;background:#000}
+  .vcard .ph{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:12px;color:var(--muted);font-size:13.5px;text-align:center;padding:18px;
+    background:linear-gradient(170deg,var(--card),var(--card-2));
+  }
+  .vcard .ph .play{
+    width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+    background:var(--accent);color:#031020;box-shadow:0 0 22px var(--glow);
+  }
+
+  /* ── Photo grid ── */
+  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:34px}
+  .pcard{
+    aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--card);
+    border:1px solid var(--line);position:relative;transition:transform .25s;
+  }
+  .pcard:hover{transform:scale(1.02)}
+  .pcard img{width:100%;height:100%;object-fit:cover;display:block}
+  .pcard .ph{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:10px;color:var(--muted);font-size:13px;
+    background:linear-gradient(150deg,var(--card),var(--card-2));
+  }
+
+  /* ── Stats ── */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:8px}
+  .stat{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 24px;text-align:center;
+  }
+  .stat .num{font-size:38px;font-weight:900;letter-spacing:-.02em;
+    background:linear-gradient(105deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stat .lbl{color:var(--muted);font-size:14px;margin-top:6px}
+
+  /* ── Contact ── */
+  .contact{
+    background:linear-gradient(150deg,var(--card),var(--card-2));
+    border:1px solid var(--line);border-radius:26px;padding:60px 40px;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+    width:380px;height:380px;background:radial-gradient(circle,var(--glow),transparent 70%);
+    filter:blur(40px);opacity:.5;
+  }
+  .contact h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px;position:relative}
+  .contact p{color:var(--muted);max-width:480px;margin:0 auto 30px;font-size:16.5px;position:relative}
+  .socials{display:flex;gap:12px;justify-content:center;margin-top:26px;position:relative}
+  .socials a{
+    width:46px;height:46px;border-radius:12px;display:grid;place-items:center;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);
+    transition:all .2s;
+  }
+  .socials a:hover{color:var(--accent);border-color:rgba(59,157,255,.4);transform:translateY(-3px)}
+
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+
+  /* ── Reveal animation ── */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+
+<div class="bg-fx"><span class="b1"></span><span class="b2"></span></div>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>Leo</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#photos">Photos</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" id="navEmail" href="#">Work with me</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="pill"><span class="live"></span> Available for brand collaborations</div>
+    <h1>Making apps feel easy.<br>Making SaaS feel <span class="grad">useful.</span></h1>
+    <p class="sub">I'm Leo — a UGC creator for tech brands, SaaS companies, and app founders. I test apps, explain features, and show real use cases that actually convert.</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" id="heroEmail" href="#">✦ Let's collaborate</a>
+      <a class="btn btn-ghost" href="#work">View my work</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid reveal">
+      <div class="about-photo">
+        <!-- ▼ ABOUT PHOTO: replace src with your headshot link, or delete the <img> line to keep placeholder -->
+        <img src="" alt="Leo" onerror="this.style.display='none'">
+        <div class="ph">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          Add your headshot here
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="sec-tag">About Leo</div>
+        <h2 class="sec-title">The smart, relatable tech friend</h2>
+        <p>I grew up in <strong>Brighton</strong>, surrounded by freelancers, agencies, and startup-minded people. I saw early on how much time gets wasted on the wrong tools — messy spreadsheets, missed invoices, confusing apps.</p>
+        <p>After studying digital product design, I worked with startups, agencies, and solo founders across the South of England — helping them choose better software, automate the boring stuff, and explain digital tools in plain English. I became the person who could take a confusing app and explain it in <strong>30 seconds</strong>.</p>
+        <p>Now I create UGC for tech brands. I make AI feel less intimidating, SaaS feel genuinely useful, and help people understand <strong>why a tool is worth trying</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="niches">
+  <div class="wrap center">
+    <div class="sec-tag reveal">What I create</div>
+    <h2 class="sec-title reveal">Content built for tech audiences</h2>
+    <p class="sec-intro reveal">Real, clear, and made for the people your product is actually for.</p>
+    <div class="niche-grid">
+      <div class="niche reveal">
+        <div class="ic">📱</div>
+        <h3>SaaS Reviews</h3>
+        <p>Honest, clear walkthroughs that show what a tool actually does.</p>
+      </div>
+      <div class="niche reveal">
+        <div class="ic">🧪</div>
+        <h3>App Testing</h3>
+        <p>Real first-use reactions and feature demos that build trust.</p>
+      </div>
+      <div class="niche reveal">
+        <div class="ic">⚡</div>
+        <h3>Productivity Tools</h3>
+        <p>Showing how the right app saves freelancers and teams real time.</p>
+      </div>
+      <div class="niche reveal">
+        <div class="ic">🤖</div>
+        <h3>AI Explainers</h3>
+        <p>Making AI tools feel approachable for non-technical users.</p>
+      </div>
+      <div class="niche reveal">
+        <div class="ic">🚀</div>
+        <h3>Founder Demos</h3>
+        <p>Helping startups explain their product in a way normal people get.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap center">
+    <div class="sec-tag reveal">Portfolio</div>
+    <h2 class="sec-title reveal">Recent video work</h2>
+    <p class="sec-intro reveal">A selection of UGC pieces — product demos, feature explainers, and reviews.</p>
+    <div class="video-grid" id="videoGrid"></div>
+  </div>
+</section>
+
+<section id="photos">
+  <div class="wrap center">
+    <div class="sec-tag reveal">Gallery</div>
+    <h2 class="sec-title reveal">On camera</h2>
+    <p class="sec-intro reveal">Lifestyle and product shots for home-office, café, and coworking settings.</p>
+    <div class="photo-grid" id="photoGrid"></div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><div class="num">30s</div><div class="lbl">Average explainer length</div></div>
+      <div class="stat"><div class="num">5+</div><div class="lbl">Niches covered</div></div>
+      <div class="stat"><div class="num">48h</div><div class="lbl">Typical turnaround</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Authentic, real use</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <h2>Let's make your product easy to love</h2>
+      <p>Got a SaaS, app, or AI tool you want explained clearly and authentically? I'd love to hear about it.</p>
+      <a class="btn btn-primary" id="contactEmail" href="#">✦ Get in touch</a>
+      <div class="socials">
+        <!-- ▼ SOCIAL LINKS: replace the href values below -->
+        <a id="soInsta" href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a id="soTiktok" href="#" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3v3.2a5 5 0 0 0 4 2v3a8 8 0 0 1-4-1.1V16a6 6 0 1 1-6-6v3a3 3 0 1 0 3 3V3h3z"/></svg></a>
+        <a id="soLinked" href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© <span id="yr"></span> Leo · UGC Creator · Brighton, UK</div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   ⚙️  CONFIG — EDIT EVERYTHING HERE
+   ════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+
+  // ── Your email (used by every "Work with me" / contact button) ──
+  email: "leobcoolstuff@gmail.com",   // ← change this
+
+  // ── Social links (also shown as icons in the contact section) ──
+  instagram: "https://instagram.com/yourhandle",  // ← change or set to ""
+  tiktok:    "https://tiktok.com/@yourhandle",     // ← change or set to ""
+  linkedin:  "https://linkedin.com/in/yourhandle", // ← change or set to ""
+
+  /* ── VIDEOS (add 3–6) ─────────────────────────────────────────
+     For each video, pick ONE type:
+       • { type:"file", src:"https://.../your-video.mp4" }   ← best for UGC
+       • { type:"embed", src:"https://www.youtube.com/embed/XXXX" }
+       • {} (empty) ← keeps a placeholder slot
+     Tip: host mp4s on your own site, Google Drive (direct link), or similar.
+  */
+  videos: [
+    { type:"file",  src:"" },   // ← paste your 1st video link inside the quotes
+    { type:"file",  src:"" },   // ← 2nd
+    { type:"file",  src:"" },   // ← 3rd
+    { type:"file",  src:"" },   // ← 4th  (delete a line to remove a slot)
+    // { type:"file", src:"" }, // ← uncomment for a 5th
+    // { type:"file", src:"" }, // ← uncomment for a 6th
+  ],
+
+  /* ── PHOTOS (add 3–6) ─────────────────────────────────────────
+     Paste an image URL in each "src". Leave "" for a placeholder.
+  */
+  photos: [
+    { src:"" },   // ← paste your 1st photo link
+    { src:"" },   // ← 2nd
+    { src:"" },   // ← 3rd
+    { src:"" },   // ← 4th
+    // { src:"" }, // ← uncomment for 5th
+    // { src:"" }, // ← uncomment for 6th
+  ],
+};
+/* ════════════════════════════════════════════════════════════════
+   No need to edit below this line.
+   ════════════════════════════════════════════════════════════════ */
+
+// Wire up email buttons
+const mailto = "mailto:" + CONFIG.email + "?subject=UGC%20Collaboration%20Enquiry";
+["navEmail","heroEmail","contactEmail"].forEach(id=>{
+  const el = document.getElementById(id); if(el) el.href = mailto;
+});
+
+// Wire up socials (hide if blank)
+function setSocial(id, url){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if(url && url.trim()){ el.href = url; } else { el.style.display="none"; }
+}
+setSocial("soInsta", CONFIG.instagram);
+setSocial("soTiktok", CONFIG.tiktok);
+setSocial("soLinked", CONFIG.linkedin);
+
+// Build video grid
+const vGrid = document.getElementById("videoGrid");
+CONFIG.videos.forEach((v, i)=>{
+  const card = document.createElement("div");
+  card.className = "vcard reveal";
+  if(v.type==="file" && v.src && v.src.trim()){
+    card.innerHTML = `<video src="${v.src}" controls playsinline preload="metadata"></video>`;
+  } else if(v.type==="embed" && v.src && v.src.trim()){
+    card.innerHTML = `<iframe src="${v.src}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+    card.innerHTML = `<div class="ph">
+        <div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        Video ${i+1}<br><span style="opacity:.7">Paste a link in CONFIG</span></div>`;
+  }
+  vGrid.appendChild(card);
+});
+
+// Build photo grid
+const pGrid = document.getElementById("photoGrid");
+CONFIG.photos.forEach((p, i)=>{
+  const card = document.createElement("div");
+  card.className = "pcard reveal";
+  if(p.src && p.src.trim()){
+    card.innerHTML = `<img src="${p.src}" alt="Leo photo ${i+1}" loading="lazy">`;
+  } else {
+    card.innerHTML = `<div class="ph">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        Photo ${i+1}</div>`;
+  }
+  pGrid.appendChild(card);
+});
+
+// Year
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+// Scroll reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+</script>
