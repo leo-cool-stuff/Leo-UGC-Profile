@@ -76,7 +76,7 @@
     background:linear-gradient(150deg,var(--card),var(--card-2));position:relative;
     box-shadow:0 30px 70px rgba(0,0,0,.45);
   }
-  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
   .hero-photo .ph{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:12px;color:var(--muted);font-size:14px;text-align:center;padding:24px;
@@ -130,7 +130,7 @@
     aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid var(--line);
     background:linear-gradient(150deg,var(--card),var(--card-2));position:relative;
   }
-  .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
   .about-photo .ph{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:10px;color:var(--muted);font-size:14px;text-align:center;padding:20px;
@@ -162,16 +162,18 @@
     background:var(--accent);color:#031020;box-shadow:0 0 22px var(--glow);
   }
 
-  /* ── Photo grid ── */
-  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:34px}
+  /* ── Photo grid (masonry, no cropping) ── */
+  .photo-grid{column-count:3;column-gap:16px;margin-top:34px}
+  @media(max-width:760px){.photo-grid{column-count:2}}
+  @media(max-width:460px){.photo-grid{column-count:1}}
   .pcard{
-    aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--card);
-    border:1px solid var(--line);position:relative;transition:transform .25s;
+    break-inside:avoid;margin:0 0 16px;border-radius:16px;overflow:hidden;background:var(--card);
+    border:1px solid var(--line);transition:transform .25s;
   }
   .pcard:hover{transform:scale(1.02)}
-  .pcard img{width:100%;height:100%;object-fit:cover;display:block}
+  .pcard img{width:100%;height:auto;display:block}
   .pcard .ph{
-    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:10px;color:var(--muted);font-size:13px;
     background:linear-gradient(150deg,var(--card),var(--card-2));
   }
@@ -362,7 +364,7 @@ const CONFIG = {
   photos: [
     { src:"https://leo-cool-stuff.github.io/Leo-UGC-Profile/leo-b-photo3.jpg" },
     { src:"https://leo-cool-stuff.github.io/Leo-UGC-Profile/leo-b-photo4.jpg" },
-    { src:"https://leo-cool-stuff.github.io/Leo-UGC-Profile/leo%20b%20photo%205.jpg" },
+    { src:"https://leo-cool-stuff.github.io/Leo-UGC-Profile/leo-b-photo-5.jpg" },
   ],
 };
 /* ════════════════════════════════════════════════════════════════
